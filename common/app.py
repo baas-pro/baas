@@ -94,7 +94,7 @@ def add_btn(layout):
     # 添加间隔
     hbox.addSpacing(10)  # 调整这个值来设置按钮之间的间隔大小
     # 创建第三个按钮并添加至水平布局
-    btn = get_btn('B站视频教程')
+    btn = get_btn('Baas最新视频')
     btn.clicked.connect(open_bilibili)
     btn.setFixedSize(88, 28)
     hbox.addWidget(btn)

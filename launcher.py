@@ -5,7 +5,7 @@ import sys
 import traceback
 import urllib.request
 
-windows_git_repo_https = 'https://gitee.com/baas-pro/baas-windows.git'
+windows_git_repo_https = 'https://gitee.com/baas-pro/baas-win.git'
 macos_m_git_repo_https = 'https://gitee.com/baas-pro/baas-macos-m.git'
 
 

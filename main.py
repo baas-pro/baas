@@ -12,7 +12,7 @@ def run_flask():
     f = Flask(__name__, static_folder='web/static', static_url_path='/static')
     f.register_blueprint(baas)
     f.register_blueprint(configs)
-    f.run(debug=False, port=1117)
+    f.run(debug=False, port=1117, host='0.0.0.0')
 
 
 if __name__ == '__main__':
