@@ -1,0 +1,11 @@
+# Created by .ignore support plugin (hsz.mobi)
+.idea
+.DS_Store
+**/runtime
+**__pycache__
+build/
+dist/
+*.spec
+!macos.spec
+!windows.spec
+.vscode

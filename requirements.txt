@@ -1,0 +1,13 @@
+aircv==1.4.6
+cnocr==2.2.4.2
+fuzzywuzzy==0.18.0
+numpy~=1.26.2
+opencv_python==4.8.0.74
+uiautomator2~=2.16.25
+onnxruntime
+opencv-python~=4.8.1.78
+python-Levenshtein
+flask~=3.0.0
+scikit-image~=0.22.0
+opencv-python-headless
+PySide6~=6.6.1
