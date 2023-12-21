@@ -1,64 +1,64 @@
 {
-    "baas": {
-        "base": {
-            "package": "com.RoamingStar.BlueArchive",
-            "serial": "127.0.0.1:16384",
-            "ss_rate": 0.1,
-            "compare_mode": "ssim",
-            "debug": false
+    "baas" : {
+        "base" : {
+            "package" : "com.RoamingStar.BlueArchive",
+            "serial" : "127.0.0.1:16384",
+            "ss_rate" : 0.1,
+            "compare_mode" : "ssim",
+            "debug" : false
         }
     },
-    "restart": {
-        "base": {
-            "enable": false,
-            "index": 999,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3888,
-            "text": "重启设置"
+    "restart" : {
+        "base" : {
+            "enable" : false,
+            "index" : 999,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3888,
+            "text" : "重启设置"
         }
     },
-    "env_check": {
-        "base": {
-            "enable": true,
-            "index": -99999999,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 99999999,
-            "text": "环境检查"
+    "env_check" : {
+        "base" : {
+            "enable" : true,
+            "index" : -99999999,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 99999999,
+            "text" : "环境检查"
         }
     },
-    "arena": {
-        "base": {
-            "enable": true,
-            "index": -999,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3600,
-            "link_task": "",
-            "text": "战术对抗赛"
+    "arena" : {
+        "base" : {
+            "enable" : true,
+            "index" : -999,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3600,
+            "link_task" : "",
+            "text" : "战术对抗赛"
         },
-        "config": {
-            "less_level": 2,
-            "max_refresh": 5
+        "config" : {
+            "less_level" : 2,
+            "max_refresh" : 5
         }
     },
-    "shop": {
-        "base": {
-            "enable": true,
-            "index": 10,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "商店购买"
+    "shop" : {
+        "base" : {
+            "enable" : true,
+            "index" : 10,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "商店购买"
         },
-        "config": [
+        "config" : [
             {
-                "enable": true,
-                "shop": "general",
-                "count": 1,
-                "goods": [
+                "enable" : true,
+                "shop" : "general",
+                "count" : 1,
+                "goods" : [
                     5,
                     6,
                     7,
@@ -74,201 +74,217 @@
                 ]
             },
             {
-                "enable": false,
-                "shop": "arena",
-                "count": 1,
-                "goods": [
+                "enable" : false,
+                "shop" : "arena",
+                "count" : 1,
+                "goods" : [
                     4,
                     5
                 ]
             }
         ]
     },
-    "cafe": {
-        "base": {
-            "enable": true,
-            "index": 20,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3600,
-            "link_task": "",
-            "text": "咖啡厅"
+    "cafe" : {
+        "base" : {
+            "enable" : true,
+            "index" : 20,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3600,
+            "link_task" : "",
+            "text" : "咖啡厅"
         },
-        "config": {
-            "interact_type": "drag_gift",
-            "blank_preset": 5,
-            "receive_ap": true
+        "config" : {
+            "interact_type" : "drag_gift",
+            "blank_preset" : 5,
+            "receive_ap" : true
         }
     },
-    "schedule": {
-        "base": {
-            "enable": true,
-            "index": 30,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "日程"
+    "schedule" : {
+        "base" : {
+            "enable" : true,
+            "index" : 30,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "日程"
+        },
+        "config" : [
+            {
+                "schedule" : 3,
+                "stage" : [
+                    7,
+                    8
+                ]
+            },
+            {
+                "schedule" : 5,
+                "stage" : [
+                    7,
+                    8
+                ]
+            }
+        ]
+    },
+    "group" : {
+        "base" : {
+            "enable" : true,
+            "index" : 40,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "小组"
         }
     },
-    "group": {
-        "base": {
-            "enable": true,
-            "index": 40,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "小组"
+    "wanted" : {
+        "base" : {
+            "enable" : true,
+            "index" : 50,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "通缉悬赏"
+        },
+        "gjgl" : {
+            "enable" : true,
+            "stage" : 9,
+            "count" : 9
+        },
+        "smtl" : {
+            "enable" : true,
+            "stage" : 9,
+            "count" : 9
+        },
+        "jt" : {
+            "enable" : true,
+            "stage" : 9,
+            "count" : 9
         }
     },
-    "wanted": {
-        "base": {
-            "enable": true,
-            "index": 50,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "通缉悬赏"
+    "special_entrust" : {
+        "base" : {
+            "enable" : true,
+            "index" : 60,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "特殊委托"
         },
-        "gjgl": {
-            "enable": true,
-            "stage": 9,
-            "count": 9
+        "jdfy" : {
+            "enable" : true,
+            "stage" : 1,
+            "count" : 1
         },
-        "smtl": {
-            "enable": true,
-            "stage": 9,
-            "count": 9
-        },
-        "jt": {
-            "enable": true,
-            "stage": 9,
-            "count": 9
+        "xyhs" : {
+            "enable" : true,
+            "stage" : 1,
+            "count" : 1
         }
     },
-    "special_entrust": {
-        "base": {
-            "enable": true,
-            "index": 60,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "特殊委托"
+    "main_story" : {
+        "base" : {
+            "enable" : true,
+            "index" : 65,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3600,
+            "link_task" : "",
+            "text" : "主线故事"
         },
-        "jdfy": {
-            "enable": true,
-            "stage": 1,
-            "count": 1
-        },
-        "xyhs": {
-            "enable": true,
-            "stage": 1,
-            "count": 1
+        "config" : {
+            "story" : 3
         }
     },
-    "main_story": {
-        "base": {
-            "enable": true,
-            "index": 65,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3600,
-            "link_task": "",
-            "text": "主线故事"
+    "hard_task" : {
+        "base" : {
+            "enable" : true,
+            "index" : 70,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "扫荡困难关卡"
         },
-        "config": {
-            "story": 3
-        }
-    },
-    "hard_task": {
-        "base": {
-            "enable": true,
-            "index": 70,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "扫荡困难关卡"
-        },
-        "scan": {
-            "stage": [
+        "scan" : {
+            "stage" : [
                 "10-1-1",
                 "11-2-2",
                 "12-3-3"
             ]
         }
     },
-    "normal_task": {
-        "base": {
-            "enable": true,
-            "index": 80,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "",
-            "text": "扫荡普通关卡"
+    "normal_task" : {
+        "base" : {
+            "enable" : true,
+            "index" : 80,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "",
+            "text" : "扫荡普通关卡"
         },
-        "scan": {
-            "stage": [
+        "scan" : {
+            "stage" : [
                 "10-3-10",
                 "11-1-10",
                 "12-5-max"
             ]
         }
     },
-    "work_task": {
-        "base": {
-            "enable": true,
-            "index": 90,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3600,
-            "link_task": "mailbox",
-            "text": "工作任务"
+    "work_task" : {
+        "base" : {
+            "enable" : true,
+            "index" : 90,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3600,
+            "link_task" : "mailbox",
+            "text" : "工作任务"
         }
     },
-    "mailbox": {
-        "base": {
-            "enable": true,
-            "index": 100,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3600,
-            "link_task": "normal_task",
-            "text": "领取邮箱"
+    "mailbox" : {
+        "base" : {
+            "enable" : true,
+            "index" : 100,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3600,
+            "link_task" : "normal_task",
+            "text" : "领取邮箱"
         }
     },
-    "buy_ap": {
-        "base": {
-            "enable": true,
-            "index": 100,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "normal_task",
-            "text": "购买体力"
+    "buy_ap" : {
+        "base" : {
+            "enable" : true,
+            "index" : 100,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "normal_task",
+            "text" : "购买体力"
         },
-        "config": {
-            "count": 6
+        "config" : {
+            "count" : 6
         }
     },
-    "make": {
-        "base": {
-            "enable": true,
-            "index": 110,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 0,
-            "link_task": "work_task",
-            "text": "制造"
+    "make" : {
+        "base" : {
+            "enable" : true,
+            "index" : 110,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 0,
+            "link_task" : "work_task",
+            "text" : "制造"
         },
-        "config": {
-            "use_acc_ticket": true,
-            "count": 4,
-            "priority": [
+        "config" : {
+            "use_acc_ticket" : true,
+            "count" : 4,
+            "priority" : [
                 "花",
                 "灿烂",
                 "万圣节",
@@ -286,74 +302,74 @@
             ]
         }
     },
-    "momo_talk": {
-        "base": {
-            "enable": true,
-            "index": 999,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 3600,
-            "link_task": "",
-            "text": "MomoTalk"
+    "momo_talk" : {
+        "base" : {
+            "enable" : true,
+            "index" : 999,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 3600,
+            "link_task" : "",
+            "text" : "MomoTalk"
         }
     },
-    "fhx": {
-        "base": {
-            "enable": true,
-            "index": -99999,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 999999999,
-            "link_task": "",
-            "text": "反和谐"
+    "fhx" : {
+        "base" : {
+            "enable" : true,
+            "index" : -99999,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 999999999,
+            "link_task" : "",
+            "text" : "反和谐"
         }
     },
-    "exp_normal_task": {
-        "base": {
-            "enable": false,
-            "index": -99,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 9999999,
-            "link_task": "",
-            "text": "普通关卡-开图"
+    "exp_normal_task" : {
+        "base" : {
+            "enable" : false,
+            "index" : -99,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 9999999,
+            "link_task" : "",
+            "text" : "普通关卡-开图"
         },
-        "config": {
-            "region": [
+        "config" : {
+            "region" : [
                 10
             ],
-            "mode": 2,
-            "manual_boss": false,
-            "burst1": -1,
-            "burst2": -1,
-            "pierce1": -1,
-            "pierce2": -1,
-            "mystic1": -1,
-            "mystic2": -1
+            "mode" : 2,
+            "manual_boss" : false,
+            "burst1" : -1,
+            "burst2" : -1,
+            "pierce1" : -1,
+            "pierce2" : -1,
+            "mystic1" : -1,
+            "mystic2" : -1
         }
     },
-    "exp_hard_task": {
-        "base": {
-            "enable": false,
-            "index": -99,
-            "next": "2023-11-17 00:00:00",
-            "end": "",
-            "interval": 9999999,
-            "link_task": "",
-            "text": "困难关卡-开图"
+    "exp_hard_task" : {
+        "base" : {
+            "enable" : false,
+            "index" : -99,
+            "next" : "2023-11-17 00:00:00",
+            "end" : "",
+            "interval" : 9999999,
+            "link_task" : "",
+            "text" : "困难关卡-开图"
         },
-        "config": {
-            "region": [
+        "config" : {
+            "region" : [
                 10
             ],
-            "mode": 2,
-            "manual_boss": false,
-            "burst1": -1,
-            "burst2": -1,
-            "pierce1": -1,
-            "pierce2": -1,
-            "mystic1": -1,
-            "mystic2": -1
+            "mode" : 2,
+            "manual_boss" : false,
+            "burst1" : -1,
+            "burst2" : -1,
+            "pierce1" : -1,
+            "pierce2" : -1,
+            "mystic1" : -1,
+            "mystic2" : -1
         }
     }
 }

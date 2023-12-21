@@ -9,8 +9,9 @@ def start(self):
     """
     check_ss(self)
     check_resolution(self)
-    check_clarity(self)
-    check_fhx(self)
+    if self.game_server == 'cn':
+        check_clarity(self)
+        check_fhx(self)
 
 
 def check_ss(self):
