@@ -9,7 +9,7 @@ from PySide6.QtWidgets import QPushButton, QLabel, QSpacerItem, QSizePolicy
 
 from web import configs
 
-version = 'v2.0.0'
+version = 'v2.0.1'
 
 
 # 使用一个子线程打开浏览器
