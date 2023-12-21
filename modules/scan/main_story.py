@@ -93,7 +93,7 @@ def start_admission(self):
 
     # 关闭获得奖励
     stage.close_prize_info(self)
-    time.sleep(2)
+    time.sleep(3)
     # 再次递归
     return start_admission(self)
 
