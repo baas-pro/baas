@@ -52,7 +52,7 @@ def check_finish(self):
         'main_story_clearance',  # 检查是否通关
         'main_story_current-clearance'  # 检查是否通关
     )
-    return image.detect(self, ends, retry=0)
+    return image.detect(self, ends, retry=3)
 
 
 def start_admission(self):
@@ -61,14 +61,12 @@ def start_admission(self):
         return
 
     # 查看第一个是否锁住了
+    cl = (1114, 237)
     if image.compare_image(self, 'main_story_first-lock', 10, 20):
         # 锁住了点第二个任务
-        self.click(1114, 339, False)
-    else:
-        self.click(1114, 237, False)
-
+        cl = (1114, 339)
     # 等待剧情信息加载
-    image.compare_image(self, 'main_story_plot-info')
+    image.detect(self, 'main_story_plot-info', cl=cl, ss_rate=2)
 
     is_fight = image.compare_image(self, 'main_story_plot-fight', 0, 10)
 
@@ -85,17 +83,39 @@ def start_admission(self):
         auto_fight(self)
         time.sleep(30)
         # 跳过剧情
-        end = momo_talk.skip_plot(self)
+        end = skip_main_story_plot(self)
         # 作战失败
         if end == 'fight_fail':
             to_choose_story(self)
             return start_admission(self)
-
-    # 关闭获得奖励
-    stage.close_prize_info(self)
+    else:
+        # 关闭获得奖励
+        stage.close_prize_info(self)
     time.sleep(3)
     # 再次递归
     return start_admission(self)
+
+
+def skip_main_story_plot(self):
+    pos = {
+        'fight_pass-confirm': (1170, 666),  # 剧情通关
+        'momo_talk_begin-relationship': (920, 568),
+        'momo_talk_menu': (1205, 42),
+        'momo_talk_skip': (1212, 116),
+        'main_story_get-prize': (644, 634),  # 确认奖励
+    }
+    # 剧情这里有三种情况
+    # 1. 打完架 -> 直接结束(要确认奖励) -> main_story_choose-plot
+    # 2. 打完架 -> 进入剧情(要跳过剧情) -> momo_talk_confirm-skip
+    # 3. 打完架 -> 作战失败(要重新开始) -> fight_fail
+    ends = ('momo_talk_confirm-skip', 'fight_fail', 'main_story_choose-plot')
+    end = image.detect(self, ends, pos)
+    if end == 'fight_fail':
+        return end
+    elif end == 'momo_talk_confirm-skip':
+        # 确认跳过
+        self.click(770, 516, False)
+        stage.close_prize_info(self, 15)
 
 
 def change_acc_auto(self):  # 战斗时开启3倍速和auto

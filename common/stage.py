@@ -63,7 +63,9 @@ def start_scan(self):
     home.click_house_under(self)
 
 
-def close_prize_info(self, ap_check=False, mail_check=False):
+def close_prize_info(self, ap_check=False, mail_check=False, retry=999):
+    if retry <= 0:
+        return
     """
     关闭奖励道具结算页面
     """
@@ -86,7 +88,7 @@ def close_prize_info(self, ap_check=False, mail_check=False):
     if mail_check and image.compare_image(self, 'mailbox_limited', 0):
         self.click(642, 527)
         return
-    return close_prize_info(self, ap_check, mail_check)
+    return close_prize_info(self, ap_check, mail_check, retry - 1)
 
 
 def wait_loading(self):

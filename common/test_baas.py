@@ -228,7 +228,7 @@ class TestBaas(unittest.TestCase):
             # 'fight_fighting-task-info',
             # 'fight_confirm',
             # 'fight_force-attack',
-            'fight_fail',
+            # 'fight_fail',
 
             #
             # 'cafe_menu',
@@ -357,6 +357,7 @@ class TestBaas(unittest.TestCase):
             # 'main_story_fight-fail',
             # 'main_story_auto',
             # 'main_story_three-times',
+            'main_story_get-prize',
             # 'cm_confirm'
         ]
         stage.wait_loading(self)
