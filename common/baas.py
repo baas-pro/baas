@@ -86,7 +86,6 @@ class Baas:
                 self.ocr = self.ocrEN
             self.ocrNum = CnOcr(det_model_name='number-densenet_lite_136-fc',
                                 rec_model_name='number-densenet_lite_136-fc')
-            self.ocrChinese = CnOcr(rec_model_name='densenet_lite_114-fc')
         except Exception as e:
             self.logger.critical(
                 r"解决方法1: 删除 C:\Users\你的用户名\AppData\Roaming\cnocr\2.2 目录 重新运行脚本会重新下载(可能要用梯子上网)")

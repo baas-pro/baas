@@ -36,7 +36,7 @@ class TestBaas(unittest.TestCase):
         self.screenshot_interval = 0.3
         self.click_time = 0.0
         self.latest_img_array = None
-        self.con = 'jp'
+        self.con = 'single'
         self.test = True
         self.load_config()
 
@@ -227,12 +227,14 @@ class TestBaas(unittest.TestCase):
             # 'fight_auto-over',
             # 'fight_fighting-task-info',
             # 'fight_confirm',
+            # 'fight_force-attack',
+            'fight_fail',
 
             #
             # 'cafe_menu',
             # 'cafe_reward-text',
             # 'cafe_0.0',
-            'cafe_students-arrived',
+            # 'cafe_students-arrived',
             # 'cafe_get-reward',
             # 'cafe_invite-status',
             # 'cafe_inc-fav',
@@ -365,7 +367,7 @@ class TestBaas(unittest.TestCase):
             image.screenshot_cut_old(self, asset, d, f)
         time.sleep(1)
         stage.wait_loading(self)
-        for i in range(3):
+        for i in range(2):
             for asset in assets:
                 assert image.compare_image(self, asset, 0, compare_mode='mse')
                 assert image.compare_image(self, asset, 0, compare_mode='ssim')
@@ -375,12 +377,12 @@ class TestBaas(unittest.TestCase):
         self.to_server_all(self.test_ss, ())
 
     def test_all_single_task(self):
-        self.ttt = 'exp_normal_task'
-        self.to_server_all(exp_normal_task.start, (self,))
+        self.ttt = 'main_story'
+        self.to_server_all(main_story.start, (self,))
 
     def to_server_all(self, fu, argv):
-        # servers = ['intl']
-        servers = ['jp', 'cn', 'intl']
+        servers = ['cn']
+        # servers = ['jp', 'cn', 'intl']
         for server in servers:
             self.con = server
             self.load_config()

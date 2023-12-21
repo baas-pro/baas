@@ -5,10 +5,27 @@ import numpy as np
 
 from common import color, stage, image
 from modules.baas import home
+from modules.reward import momo_talk
 
 story_position = {
     1: (350, 345), 2: (950, 345)
 }
+
+
+def to_main_story(self):
+    pos = {
+        'home_student': (1200, 573),  # 首页->业务区
+        'home_bus': (1111, 286),  # 业务区->故事
+        'main_story_story': (248, 355),  # 故事->主线故事
+    }
+    home.to_menu(self, 'main_story_menu', pos)
+
+
+def to_choose_story(self):
+    pos = {
+        'fight_fail': (647, 655)
+    }
+    image.detect(self, 'main_story_choose-plot', pos)
 
 
 def start(self):
@@ -16,18 +33,9 @@ def start(self):
         return self.logger.critical('外服此功能待开发...')
     # 回到首页
     home.go_home(self)
-    # 点击业务区
-    self.double_click(1195, 576)
-    # 等待业务区页面加载
-    image.compare_image(self, 'home_bus', mis_fu=self.click, mis_argv=(1195, 576))
 
-    # 点击故事
-    self.click(1093, 273)
-    image.compare_image(self, 'main_story_story')
-
-    # 点击主线故事
-    self.click(248, 355)
-    image.compare_image(self, 'main_story_menu')
+    # 到主线故事
+    to_main_story(self)
 
     # 选择故事
     select_story(self)
@@ -39,39 +47,26 @@ def start(self):
     home.go_home(self)
 
 
-def skip_polt(self):
-    """
-    跳过剧情
-    @param self:
-    @return:
-    """
-    while True:
-        # 等待菜单出现
-        image.compare_image(self, 'cm_skip-menu')
-        # 点击菜单
-        self.click(1204, 40, False)
-        # 点击>>
-        self.click(1210, 120, False, 1, 1)
-        # 等待跳过加载
-        if image.compare_image(self, 'cm_confirm', 3):
-            # 点击跳过
-            self.click(770, 521, False)
-            return
+def check_finish(self):
+    ends = (
+        'main_story_clearance',  # 检查是否通关
+        'main_story_current-clearance'  # 检查是否通关
+    )
+    return image.detect(self, ends, retry=0)
 
 
 def start_admission(self):
-    # 检查是否通关
-    if image.compare_image(self, 'main_story_clearance', 0, 10):
+    if check_finish(self) is not None:
+        self.logger.error("剧情已经完成了")
         return
-    # 检查是否通关
-    if image.compare_image(self, 'main_story_current-clearance', 0, 10):
-        return
+
     # 查看第一个是否锁住了
     if image.compare_image(self, 'main_story_first-lock', 10, 20):
         # 锁住了点第二个任务
         self.click(1114, 339, False)
     else:
         self.click(1114, 237, False)
+
     # 等待剧情信息加载
     image.compare_image(self, 'main_story_plot-info')
 
@@ -80,17 +75,21 @@ def start_admission(self):
     # 进入剧情
     self.click(641, 516, False)
     # 跳过剧情
-    skip_polt(self)
+    momo_talk.skip_plot(self)
 
     if is_fight:
-        # 等待部队出击页面加载
-        image.compare_image(self, 'main_story_plot-attack')
-        time.sleep(3)
-        # 点击出击
-        self.click(1158, 655, False)
+        # 等待部队出击加载
+        image.detect(self, 'fight_force-attack')
+        # 点击出击,直到没有部队出击
+        image.compare_image(self, 'fight_force-attack', mis_fu=self.click, mis_argv=(1163, 658), rate=1, n=True)
         auto_fight(self)
+        time.sleep(30)
         # 跳过剧情
-        skip_polt(self)
+        end = momo_talk.skip_plot(self)
+        # 作战失败
+        if end == 'fight_fail':
+            to_choose_story(self)
+            return start_admission(self)
 
     # 关闭获得奖励
     stage.close_prize_info(self)
@@ -125,7 +124,7 @@ def change_acc_auto(self):  # 战斗时开启3倍速和auto
 def auto_fight(self):
     time.sleep(3)
     stage.wait_loading(self)
-    time.sleep(8)
+    time.sleep(10)
     change_acc_auto(self)
     self.logger.warning("检查自动释放技能完成")
 
@@ -136,6 +135,8 @@ def select_story(self):
     @param self:
     @return:
     """
+    self.double_click(36, 361, False)
+    time.sleep(0.5)
     story = self.tc['config']['story']
     quotient = (story - 1) // 2
     self.click(1246, 335, False, quotient, 0.5)

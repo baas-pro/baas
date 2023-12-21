@@ -9,7 +9,7 @@ from PySide6.QtWidgets import QPushButton, QLabel, QSpacerItem, QSizePolicy
 
 from web import configs
 
-version = 'v2.0.1'
+version = 'v2.0.3'
 
 
 # 使用一个子线程打开浏览器
@@ -23,7 +23,7 @@ def open_github():
 
 
 def open_bilibili():
-    webbrowser.open_new('https://space.bilibili.com/25881702')
+    webbrowser.open_new('https://www.bilibili.com/video/BV1F94y1w78A')
 
 
 def start():

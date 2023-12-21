@@ -116,13 +116,20 @@ def begin_relationship(self):
     开始好感故事
     :param self:
     """
+    skip_plot(self)
+    # 关闭奖励
+    stage.close_prize_info(self, True)
+
+
+def skip_plot(self):
     pos = {
+        'fight_pass-confirm': (1170, 666),  # 剧情通关
         'momo_talk_begin-relationship': (920, 568),
         'momo_talk_menu': (1205, 42),
         'momo_talk_skip': (1212, 116)
     }
-    image.detect(self, 'momo_talk_confirm-skip', pos)
+    end = image.detect(self, ('momo_talk_confirm-skip', 'fight_fail'), pos)
+    if end == 'fight_fail':
+        return end
     # 确认跳过
     self.click(770, 516, False)
-    # 关闭奖励
-    stage.close_prize_info(self, True)
