@@ -31,7 +31,7 @@ def to_task_menu(self):
         'fight_task-finish-confirm': (1033, 666),
         'fight_prize-confirm': (776, 655),
     }
-    image.detect(self, 'normal_task_choose-region', possible, ss_rate=1)
+    image.detect(self, 'normal_task_choose-region', possible, ss_rate=2)
     stage.wait_loading(self)
 
 
@@ -105,11 +105,11 @@ def start_fight(self, region, gk=None):
     # 遍历start需要哪些队伍
     if gk == "side":
         # 选择支线部队开始战斗
-        start_choose_side_team(self, self.tc['config'][self.stage_data[str(region)]['side']])
-        time.sleep(1)
-        self.click(1171, 670)
-        # 自动战斗
-        main_story.auto_fight(self)
+        start_choose_side_team(self, self.stage_data[str(region)]['side'])
+        image.compare_image(self, 'fight_force-edit')
+        image.compare_image(self, 'fight_force-edit', threshold=10, mis_fu=self.click, mis_argv=(1171, 670),
+                            rate=1,
+                            n=True)
     else:
         prev_index = 0
         for n, p in self.stage_data[gk]['start'].items():
@@ -117,13 +117,16 @@ def start_fight(self, region, gk=None):
             if cu_index < prev_index:
                 self.exit("队伍配置错误,请根据开图区域设置主队编号小于副队编号!比如主队为1号队,副队为2号队")
             prev_index = cu_index
-        # 点击开始任务 todo 改成图片
+        # 点击开始任务
         start_mission(self)
+        # 检查跳过战斗
         check_skip_auto_over(self)
-        start_action(self, gk, self.stage_data)  # 开始战斗
-        main_story.auto_fight(self)  # 自动战斗
-        time.sleep(20)
-
+        # 开始走格子
+        start_action(self, gk, self.stage_data)
+    # 自动战斗
+    main_story.auto_fight(self)
+    self.logger.info("强制等待25秒...")
+    time.sleep(25)
     to_task_menu(self)
     # 返回上一个区域,防止解锁地图卡识别
     normal_task.choose_region(self, region - 1)
@@ -223,52 +226,58 @@ def calc_need_fight_stage(self, region):
     @return:
     """
     wait_task_info(self, True)
-    fail = 0
+    stage_index = 1
     while True:
         # 等待任务信息加载
         task_state = check_task_state(self)
-        self.logger.info("当前关卡状态为:{0}".format(task_state))
+        self.logger.warning("当前关卡状态为:{0}".format(task_state))
         # 未通关支线
         if task_state == 'side':
-            self.logger.info("未通关支线，开始支线战斗")
+            self.logger.warning("未通关支线，开始支线战斗")
             return task_state
+        # 获取当前关卡
+        current_stage = get_stage(self, region, task_state, stage_index)
         # 未通关主线
         if task_state == 'no-pass':
-            self.logger.info("未通关主线，开始主线战斗")
-            return get_stage(self, region, task_state)
+            self.logger.warning(f"{current_stage} 未通关主线，开始主线战斗")
+            return current_stage
         # 模式2 ⭐️⭐️⭐️  或者 ⭐️⭐️⭐️+宝箱礼物
         if self.tc['config']['mode'] == 2:
             if task_state == 'box':
-                self.logger.info("发现星辉石宝箱，开始主线战斗")
-                return get_stage(self, region, task_state)
+                self.logger.warning(f"{current_stage} 发现星辉石宝箱，开始主线战斗")
+                return current_stage
             if task_state != 'sss':
-                self.logger.info("未三星通关，开始主线战斗")
-                return get_stage(self, region, task_state)
+                self.logger.warning(f"{current_stage} 未三星通关，开始主线战斗")
+                return current_stage
         # 点击下一关
-        self.logger.warn("不满足战斗条件,查找下一关")
+        self.logger.warning(f"{current_stage} 不满足战斗条件,查找下一关")
         self.click(1172, 358)
         # 检测是否还在本区域
-        fail += 1
-        if fail >= 5:
+        stage_index += 1
+        if stage_index >= 6:
             time.sleep(1)
             if region != ocr.screenshot_get_text(self, (189, 197, 228, 225), self.ocrNum):
                 return None
 
 
-def get_stage(self, region, task_state):
-    max = 7 if self.game_server != 'cn' and region in [6, 9, 12, 15, 18] else 6
-    for i in range(1, max):
-        s = '{0}-{1}'.format(region, i)
-        try:
-            box = (191, 199, 265, 224) if self.game_server == 'cn' else (146, 199, 219, 229)
-            if image.compare_image(self, 'normal_task_' + s, 0, box=box):
-                if task_state == 'box':
-                    return s + '-box'
-                return s
-        except KeyError:
-            self.logger.critical("当前关卡{0}尚未支持开图，正在全力研发中...".format(s))
-            return None
-    return None
+def get_stage(self, region, task_state, stage_index):
+    s = '{0}-{1}'.format(region, stage_index)
+    if task_state == 'box':
+        return s + '-box'
+    return s
+    # max = 7 if self.game_server != 'cn' and region in [6, 9, 12, 15, 18] else 6
+    # for i in range(1, max):
+    #     s = '{0}-{1}'.format(region, i)
+    #     try:
+    #         box = (191, 199, 265, 224) if self.game_server == 'cn' else (146, 199, 219, 229)
+    #         if image.compare_image(self, 'normal_task_' + s, 0, box=box):
+    #             if task_state == 'box':
+    #                 return s + '-box'
+    #             return s
+    #     except KeyError:
+    #         self.logger.critical("当前关卡{0}尚未支持开图，正在全力研发中...".format(s))
+    #         return None
+    # return None
 
 
 def get_force(self):
@@ -344,6 +353,8 @@ def start_choose_team(self, gk, force):
     to_force_edit_page(self, self.stage_data[gk]['start'][force])
     # 选择对应属性的队伍
     select_force_fight(self, force_index)
+    # 回到任务开始界面
+    to_tart_task_page(self)
     return force_index
 
 
@@ -366,8 +377,6 @@ def select_force_fight(self, index):
     while not color.check_rgb(self, fp, (45, 70, 99)):
         self.click(*fp)
         time.sleep(self.bc['baas']['base']['ss_rate'])
-    # 回到任务开始界面
-    to_tart_task_page(self)
 
 
 def wait_over(self):
@@ -379,6 +388,6 @@ def start_mission(self):
     """
     开始任务
     """
-    # 点击开始任务
-    self.click(1172, 663)
-    time.sleep(3)
+    image.compare_image(self, 'fight_start-task', threshold=10, mis_fu=self.click, mis_argv=(1171, 670),
+                        rate=1,
+                        n=True)

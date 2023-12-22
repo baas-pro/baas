@@ -426,11 +426,6 @@
         "config" : {
             "name" : "关卡设置"
         },
-        "config.manual_boss" : {
-            "desc" : "开启后,推图时进入boss关后点击右上角暂停",
-            "name" : "手动打boss关",
-            "type" : "bool"
-        },
         "config.region" : {
             "items" : {
                 "max" : 20,
@@ -626,11 +621,6 @@
         "$extends" : "base",
         "config" : {
             "name" : "关卡设置"
-        },
-        "config.manual_boss" : {
-            "desc" : "开启后,推图时进入boss关后点击右上角暂停",
-            "name" : "手动打boss关",
-            "type" : "bool"
         },
         "config.region" : {
             "items" : {

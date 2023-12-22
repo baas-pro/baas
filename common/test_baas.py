@@ -357,7 +357,7 @@ class TestBaas(unittest.TestCase):
             # 'main_story_fight-fail',
             # 'main_story_auto',
             # 'main_story_three-times',
-            'main_story_get-prize',
+            # 'main_story_get-prize',
             # 'cm_confirm'
         ]
         stage.wait_loading(self)

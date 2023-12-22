@@ -122,29 +122,29 @@ def change_acc_auto(self):  # 战斗时开启3倍速和auto
     img1 = cv2.cvtColor(np.array(self.d.screenshot()), cv2.COLOR_RGB2BGR)
     auto_r_ave = int(img1[677][1171][0]) // 2 + int(img1[677][1246][0]) // 2
     if 190 <= auto_r_ave <= 230:
-        self.logger.info("CHANGE MANUAL to auto")
+        self.logger.info("将手动释放更改为自动释放")
         self.click(1215, 678)
     elif 0 <= auto_r_ave <= 60:
-        self.logger.info("AUTO")
+        self.logger.info("自动释放技能")
     else:
-        self.logger.warning("can't identify auto button")
+        self.logger.warning("无法识别自动按钮")
     acc_r_ave = int(img1[625][1196][0]) // 3 + int(img1[625][1215][0]) // 3 + int(img1[625][1230][0]) // 3
     if 250 <= acc_r_ave <= 260:
-        self.logger.info("CHANGE acceleration phase from 2 to 3")
+        self.logger.info("将加速阶段从 2 更改为 3")
         self.click(1215, 625)
     elif 0 <= acc_r_ave <= 60:
-        self.logger.info("ACCELERATION phase 3")
+        self.logger.info("加速阶段 3")
     elif 140 <= acc_r_ave <= 180:
-        self.logger.info("CHANGE acceleration phase from 1 to 3")
+        self.logger.info("将加速阶段从 1 更改为 3")
         self.click(1215, 625, count=2)
     else:
-        self.logger.warning("CAN'T DETECT acceleration BUTTON")
+        self.logger.warning("无法识别加速按钮")
 
 
 def auto_fight(self):
     time.sleep(3)
     stage.wait_loading(self)
-    time.sleep(10)
+    time.sleep(20)
     change_acc_auto(self)
     self.logger.warning("检查自动释放技能完成")
 
