@@ -1,0 +1,29 @@
+name: Python Executable Build
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v5.0.0
+      - name: Setup Requirements
+        run: python -m pip install -r requirements.txt
+      - name: Setup PyInstaller
+        run: python -m pip install pyinstaller
+      - name: Build
+        run: pyinstaller main.py
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-debug
+          path: |
+            build
