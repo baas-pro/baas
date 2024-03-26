@@ -6,7 +6,7 @@ from modules.baas import home
 schedule_position = {
     'cn': {
         1: (908, 182), 2: (908, 285), 3: (908, 397), 4: (908, 502), 5: (908, 606),
-        6: (908, 606),
+        6: (908, 502), 7: (908, 606),
     },
     'intl': {
         1: (908, 182), 2: (908, 285), 3: (908, 397), 4: (908, 502), 5: (908, 606),
@@ -18,9 +18,15 @@ schedule_position = {
     }
 }
 curse_position = {
-    1: (300, 210), 2: (640, 210), 3: (990, 210),
-    4: (300, 360), 5: (640, 360), 6: (990, 360),
-    7: (300, 516), 8: (640, 516), 9: (990, 516),
+    9: (990, 516),
+    8: (640, 516),
+    7: (300, 516),
+    6: (990, 360),
+    5: (640, 360),
+    4: (300, 360),
+    3: (990, 210),
+    2: (640, 210),
+    1: (300, 210),
 }
 
 
@@ -53,7 +59,7 @@ def choose_course(self):
         # 点击学院
         to_college(self, tk['schedule'])
         # 学习课程
-        if learn_course(self, tk['schedule'], tk['stage']):
+        if learn_course(self, tk['schedule'], tk['count']):
             break
         # 回到日程菜单
         pos = {
@@ -87,24 +93,26 @@ def start_course(self, course_x):
     time.sleep(2)
 
 
-def learn_course(self, schedule, courses):
+def learn_course(self, schedule, count):
     self.logger.warning("开始检查课程...")
-    for c in courses:
-        # 检查课程是否可用
-        if not color.check_rgb(self, curse_position[c], (255, 255, 255), 20):
-            self.logger.error("课程状态不可用")
-            continue
-        # 点击课程
-        self.logger.warning("开始学习课程...")
-        start_course(self, curse_position[c])
+    for i in range(count):
+        for c, p in curse_position.items():
+            # 检查课程是否可用
+            if not color.check_rgb(self, p, (255, 255, 255), 20):
+                self.logger.error(f'课程{c} 状态不可用')
+                continue
+            # 点击课程
+            self.logger.warning(f"开始学习课程{c}...")
+            start_course(self, p)
 
-        if image.compare_image(self, 'schedule_limited', 0):
-            self.logger.error("没有门票了")
-            return True
-        # 等待日程报告
-        image.compare_image(self, 'schedule_course-report', cl=(774, 141))
-        # 确认报告
-        pos = {
-            'schedule_course-report': (641, 550)  # 日程报告
-        }
-        image.detect(self, 'schedule_course-info', pos, cl=(774, 141))
+            if image.compare_image(self, 'schedule_limited', 0):
+                self.logger.error("没有门票了")
+                return True
+            # 等待日程报告
+            image.compare_image(self, 'schedule_course-report', cl=(774, 141))
+            # 确认报告
+            pos = {
+                'schedule_course-report': (641, 550)  # 日程报告
+            }
+            image.detect(self, 'schedule_course-info', pos, cl=(774, 141))
+            break

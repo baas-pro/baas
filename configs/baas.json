@@ -117,17 +117,11 @@
         "config": [
             {
                 "schedule": 3,
-                "stage": [
-                    7,
-                    8
-                ]
+                "count": 2
             },
             {
                 "schedule": 5,
-                "stage": [
-                    7,
-                    8
-                ]
+                "count": 2
             }
         ]
     },

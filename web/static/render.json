@@ -1886,7 +1886,7 @@
                     "value" : 6
                 },
                 {
-                    "name" : "赤冬联邦学园",
+                    "name" : "红冬联邦学园",
                     "value" : 7
                 },
                 {
@@ -1905,18 +1905,9 @@
             "name" : "区域",
             "type" : "sel"
         },
-        "config.stage" : {
-            "desc" : "从左往右，从上往下的顺序数",
-            "items" : {
-                "max" : 9,
-                "min" : 1,
-                "step" : 1
-            },
-            "name" : "日程序号",
-            "opts" : {
-                "multiple" : "true"
-            },
-            "type" : "sel"
+        "config.count" : {
+            "desc" : "当前日程要扫荡的次数，从最高评级依次往下扫荡",
+            "name" : "扫荡次数"
         }
     },
     "shop" : {
