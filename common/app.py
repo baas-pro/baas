@@ -1,7 +1,7 @@
 import webbrowser
 from common import config
 
-version = 'v2.4.1'
+version = 'v2.4.2'
 
 
 def open_baas():

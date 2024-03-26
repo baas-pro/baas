@@ -45,7 +45,7 @@ class TestBaas(unittest.TestCase):
         self.flag_run = True
         self.click_time = 0.0
         self.latest_img_array = None
-        self.con = '1_cn'
+        self.con = '02_wz'
         self.test = True
         self.load_config()
 
@@ -400,7 +400,7 @@ class TestBaas(unittest.TestCase):
             # 'main_story_auto',
             # 'main_story_three-times',
             # 'main_story_get-prize',
-            # 'cm_confirm'
+            'cm_activity-menu'
 
             # 'spa_227_entrance',
             # 'spa_227_menu',
@@ -415,7 +415,7 @@ class TestBaas(unittest.TestCase):
             # 'cherry_blossoms_menu',
             # 'new_year_guide',
 
-            'nun_magician_menu'
+            # 'nun_magician_menu'
         ]
         stage.wait_loading(self)
         print("开始截图...")

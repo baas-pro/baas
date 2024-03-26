@@ -8,7 +8,7 @@ from modules.story import main_story
 position = {
     9: (1130, 300), 10: (1130, 413), 11: (1130, 530), 12: (1130, 640)
 }
-current_men = 'nun_magician_menu'
+current_men = 'cm_activity-menu'
 
 
 def start(self):
