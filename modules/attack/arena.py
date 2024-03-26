@@ -72,6 +72,12 @@ def start_fight(self, wait=False):
     image.compare_image(self, 'fight_edit-attack-force', cl=(1163, 658), rate=1, n=True)
     # 等到ID出现 一直点击页面关闭晋升弹窗
     image.detect(self, 'arena_id', cl=(1235, 82))
+    # 如果只打一次直接完成
+    if self.tc['config']['get_type'] == 'one':
+        self.finish_seconds = 0
+        self.logger.error("当前设置只打一次，直接领取奖励。并且短时间内不再继续进攻")
+        get_prize(self)
+        return
     start_fight(self, True)
 
 

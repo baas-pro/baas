@@ -42,6 +42,7 @@
         },
         "config": {
             "less_level": 2,
+            "get_type": "five",
             "max_refresh": 5
         }
     },

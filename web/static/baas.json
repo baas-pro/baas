@@ -42,7 +42,8 @@
         },
         "config" : {
             "less_level" : 2,
-            "max_refresh" : 5
+            "max_refresh" : 5,
+            "get_type" : "five"
         }
     },
     "shop" : {
