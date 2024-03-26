@@ -103,7 +103,7 @@ def drag_gift_click_girl(self):
         res = match(self, self.latest_img_array)
         self.click(1237, 573)
         for j in range(0, len(res)):
-            self.click(res[j][0], min(res[j][1], 591), wait=False)
+            self.double_click(res[j][0], min(res[j][1], 591), wait=False)
 
         to_cafe(self)
         if i != 4:
@@ -212,6 +212,7 @@ def init_window(self):
 def to_invitation_ticket(self):
     possible = {
         'cafe_menu': (838, 647),
+        'cafe_inc-fav': (641, 537, 50),  # 好感提升
     }
     return image.detect(self, 'cafe_invitation-ticket', possible)
 
@@ -283,6 +284,7 @@ def get_cafe_money(self):
     pos = {
         'cafe_reward-text': (1152, 664),
         'cafe_students-arrived': (922, 189),  # 学生到访
+        'cafe_inc-fav': (641, 537, 50),  # 好感提升
     }
     rst = image.detect(self, ('cafe_0.0', 'cafe_get-reward'), pos)
     if rst == 'cafe_0.0':
