@@ -72,8 +72,11 @@ def start_chat(self):
     开始聊天
     :param self:
     """
+    self.swipe(700, 600, 700, 100, 0.1)
+    time.sleep(1)
     self.mm_i = 0
     while self.mm_i < 5:
+        # 上拉最新信息
         self.latest_img_array = self.get_screenshot_array()
         # 检测回复
         rst = image.find_img(self, self.latest_img_array, 'momo_talk_reply', y_add=62)
