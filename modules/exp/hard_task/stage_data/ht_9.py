@@ -45,7 +45,7 @@ stage_data = {
 
             # 第四回合
             {'t': 'exchange', 'ec': True, 'desc': "change to 2"},
-            {'t': 'click', 'p': (785, 550), 'ec': True, 'wo': True, 'desc': "2 lower right & get box"},
+            {'t': 'click', 'p': (785, 550), 'wo': True, 'desc': "2 lower right & get box"},
             {'t': 'click', 'p': (720, 355), 'desc': "1 right"},
         ]
     },
@@ -84,7 +84,7 @@ stage_data = {
 
             # 第三回合
             {'t': 'exchange', 'ec': True, 'desc': "change to 2"},
-            {'t': 'click', 'p': (840, 295), 'ec': True, 'desc': "2 upper right & get box"},
+            {'t': 'click', 'p': (840, 295), 'wo': True, 'desc': "2 upper right & get box"},
             {'t': 'click', 'p': (375, 400), 'desc': "1 left"},
 
         ]
