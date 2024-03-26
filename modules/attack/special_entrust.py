@@ -1,3 +1,5 @@
+import time
+
 from common import stage, image
 from modules.baas import home
 
@@ -13,7 +15,7 @@ wanted_lv_position = {
 se_lv_position = {
     'cn': {
         1: (1116, 185), 2: (1116, 285), 3: (1116, 385), 4: (1116, 485), 5: (1116, 585), 6: (1116, 666),
-        7: (1116, 427), 8: (1116, 526), 9: (1116, 630),
+        7: (1116, 330), 8: (1116, 430), 9: (1116, 516), 10: (1116, 630),
     },
     'jp': {
         1: (1116, 185), 2: (1116, 285), 3: (1116, 385), 4: (1116, 485), 5: (1116, 585), 6: (1116, 666),
@@ -87,6 +89,9 @@ def choose_entrust(self, position):
         rst = stage.confirm_scan(self, tk['stage'], tk['count'], 9)
         if rst == 'return':
             return
+        # 返回上级菜单
+        self.click(57, 36)
+        time.sleep(1)
 
 
 def get_lv_position(self, lv):
