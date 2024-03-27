@@ -57,10 +57,11 @@ def menus_list():
     global is_start
     if not is_start:
         startup = next((arg.split('=')[1] for arg in sys.argv if arg.startswith('startup=')), None)
-        startup = startup.split("/")
-        for con in startup:
-            process.m.start_process(con)
-        is_start = True
+        if startup is not None:
+            startup = startup.split("/")
+            for con in startup:
+                process.m.start_process(con)
+            is_start = True
     menus = [
         {
             'name': 'Baas',
@@ -70,6 +71,7 @@ def menus_list():
                 {'name': 'restart', 'text': '重启设置'},
                 {'name': 'env_check', 'text': '环境检查'},
                 {'name': 'fhx', 'text': '反和谐'},
+                {'name': 'delete_friend', 'text': '删除好友'},
             ]
         },
         {

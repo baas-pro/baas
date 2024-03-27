@@ -12,7 +12,7 @@ from uiautomator2 import Device
 from common import stage, process, config, log, encrypt
 from modules.activity import summer_vacation, spa_227, new_year, cherry_blossoms, nun_magician
 from modules.attack import exchange_meeting, special_entrust, wanted, arena, normal_task, hard_task
-from modules.baas import restart, fhx, env_check
+from modules.baas import restart, fhx, env_check, delete_friend
 from modules.daily import group, cafe, schedule, make
 from modules.exp.hard_task import exp_hard_task
 from modules.exp.normal_task import exp_normal_task
@@ -39,6 +39,7 @@ func_dict = {
     'env_check': env_check.start,
     'fhx': fhx.start,
     'restart': restart.start,
+    'delete_friend': delete_friend.start,
     # 每日
     'cafe': cafe.start,
     'group': group.start,
@@ -188,7 +189,8 @@ class Baas:
         wait = self.task_schedule(None)['waiting'][0]
         next_time = datetime.strptime(wait['next'], "%Y-%m-%d %H:%M:%S")
         if next_time >= datetime.now() + timedelta(seconds=600):
-            self.logger.warning("当前已开启 无任务时 关闭游戏开关，节约电脑资源. 如需关闭到:Baas->Baas设置->禁用 关闭游戏设置")
+            self.logger.warning(
+                "当前已开启 无任务时 关闭游戏开关，节约电脑资源. 如需关闭到:Baas->Baas设置->禁用 关闭游戏设置")
             restart.only_stop(self)
             return True
         return False
@@ -263,13 +265,21 @@ class Baas:
                 continue
             if con['base']['next'] == '':
                 con['base']['next'] = datetime.now().strftime('%Y-%m-%d 00:00:00')
+            try:
+                next_time = datetime.strptime(con['base']['next'], "%Y-%m-%d %H:%M:%S")
+            except ValueError as e:
+                next_time = datetime.now() - timedelta(days=1)
+                con['base']['next'] = datetime.now().strftime('%Y-%m-%d 00:00:00')
+            try:
+                end_time = datetime.strptime(con['base']['end'], "%Y-%m-%d %H:%M:%S")
+            except ValueError as e:
+                end_time = datetime.now() + timedelta(days=1)
+                con['base']['end'] = ''
             # 超出截止时间
-            if not con['base']['enable'] or (
-                    con['base']['end'] != '' and datetime.strptime(con['base']['end'],
-                                                                   "%Y-%m-%d %H:%M:%S") < datetime.now()):
+            if not con['base']['enable'] or (con['base']['end'] != '' and end_time < datetime.now()):
                 continue
             # 时间未到
-            if datetime.strptime(con['base']['next'], "%Y-%m-%d %H:%M:%S") >= datetime.now():
+            if next_time >= datetime.now():
                 continue
             task = {'index': con['base']['index'], 'next': con['base']['next'], 'task': ba_task, 'con': con}
             queue.append(task)
@@ -285,11 +295,21 @@ class Baas:
         queue = []
         closed = []
         for ba_task, con in self.bc.items():
-            # 被关闭的功能
             if ba_task == 'baas':
                 continue
             if con['base']['next'] == '':
                 con['base']['next'] = datetime.now().strftime('%Y-%m-%d 00:00:00')
+            try:
+                next_time = datetime.strptime(con['base']['next'], "%Y-%m-%d %H:%M:%S")
+            except ValueError as e:
+                next_time = datetime.now() - timedelta(days=1)
+                con['base']['next'] = datetime.now().strftime('%Y-%m-%d 00:00:00')
+            try:
+                end_time = datetime.strptime(con['base']['end'], "%Y-%m-%d %H:%M:%S")
+            except ValueError as e:
+                end_time = datetime.now() + timedelta(days=1)
+                con['base']['end'] = ''
+            # 被关闭的功能
             task = {'next': con['base']['next'], 'task': ba_task, 'text': con['base']['text'],
                     'index': con['base']['index']}
             # 正在运行中的任务
@@ -297,12 +317,11 @@ class Baas:
                 running.append(task)
                 continue
             if not con['base']['enable'] or (
-                    con['base']['end'] != '' and datetime.strptime(con['base']['end'],
-                                                                   "%Y-%m-%d %H:%M:%S") < datetime.now()):
+                    con['base']['end'] != '' and end_time < datetime.now()):
                 closed.append(task)
                 continue
             # 时间未到
-            if datetime.strptime(con['base']['next'], "%Y-%m-%d %H:%M:%S") > datetime.now():
+            if next_time > datetime.now():
                 waiting.append(task)
                 continue
             # 队列中

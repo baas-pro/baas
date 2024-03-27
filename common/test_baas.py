@@ -11,7 +11,7 @@ from cnocr import CnOcr
 from common import color, image, encrypt
 from common import stage, config, log
 from modules.attack import normal_task, arena
-from modules.baas import home
+from modules.baas import home, delete_friend
 from modules.daily import cafe, schedule, group, make
 from modules.exp.normal_task import exp_normal_task
 from modules.reward import work_task
@@ -28,6 +28,7 @@ from modules.reward import work_task, mailbox
 from modules.shop import shop, buy_ap
 from modules.story import momo_talk, main_story
 from modules.task import challenge_hard_task
+
 
 class TestBaas(unittest.TestCase):
 
@@ -400,7 +401,7 @@ class TestBaas(unittest.TestCase):
             # 'main_story_auto',
             # 'main_story_three-times',
             # 'main_story_get-prize',
-            'cm_activity-menu'
+            # 'cm_activity-menu'
 
             # 'spa_227_entrance',
             # 'spa_227_menu',
@@ -416,6 +417,12 @@ class TestBaas(unittest.TestCase):
             # 'new_year_guide',
 
             # 'nun_magician_menu'
+
+            # 'delete_friend_sysmenu',
+            # 'delete_friend_fri-manage',
+            # 'delete_friend_menu',
+            # 'delete_friend_del-fri',
+            'delete_friend_del-notice',
         ]
         stage.wait_loading(self)
         print("开始截图...")
@@ -437,8 +444,8 @@ class TestBaas(unittest.TestCase):
         self.to_server_all(self.test_ss, ())
 
     def test_all_single_task(self):
-        self.ttt = 'nun_magician'
-        self.to_server_all(nun_magician.start, (self,))
+        self.ttt = 'delete_friend'
+        self.to_server_all(delete_friend.start, (self,))
 
     def to_server_all(self, fu, argv):
         # servers = ['1_cn', '1_jp', '1_intl']
