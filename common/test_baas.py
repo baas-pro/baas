@@ -319,7 +319,7 @@ class TestBaas(unittest.TestCase):
             # 'schedule_menu',
             # 'schedule_surplus',
             # 'schedule_course-info',
-            # 'schedule_limited',
+            'schedule_limited',
             # 'schedule_course-pop',
             # 'schedule_course-report',
 
@@ -422,7 +422,7 @@ class TestBaas(unittest.TestCase):
             # 'delete_friend_fri-manage',
             # 'delete_friend_menu',
             # 'delete_friend_del-fri',
-            'delete_friend_del-notice',
+            # 'delete_friend_del-notice',
         ]
         stage.wait_loading(self)
         print("开始截图...")
@@ -449,7 +449,7 @@ class TestBaas(unittest.TestCase):
 
     def to_server_all(self, fu, argv):
         # servers = ['1_cn', '1_jp', '1_intl']
-        servers = ['1_cn']
+        servers = ['1_jp']
         for server in servers:
             self.con = server
             self.load_config()

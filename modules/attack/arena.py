@@ -5,11 +5,17 @@ from modules.baas import home
 
 finish_seconds = 55
 
+arena_p = {
+    'cn': (1080, 570),
+    'intl': (1080, 570),
+    'jp': (880, 580),
+}
+
 
 def to_arena(self):
     pos = {
         'home_student': (1200, 573),  # 首页->业务区
-        'home_bus': (1080, 570),  # 首页->竞技场
+        'home_bus': arena_p[self.game_server],  # 业务区->竞技场
     }
     home.to_menu(self, 'arena_menu', pos)
 

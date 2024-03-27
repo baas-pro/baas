@@ -95,8 +95,16 @@ def start_course(self, course_x):
 
 def learn_course(self, schedule, count):
     self.logger.warning("开始检查课程...")
-    for i in range(count):
+    i = 0
+    while i < count:
         for c, p in curse_position.items():
+            # 检查课程是否已完成
+            if i >= count:
+                break
+            if color.check_rgb(self, p, (239, 239, 237), 20):
+                self.logger.error("当前课程已完成")
+                i = i + 1
+                continue
             # 检查课程是否可用
             if not color.check_rgb(self, p, (255, 255, 255), 20):
                 self.logger.error(f'课程{c} 状态不可用')
@@ -105,7 +113,7 @@ def learn_course(self, schedule, count):
             self.logger.warning(f"开始学习课程{c}...")
             start_course(self, p)
 
-            if image.compare_image(self, 'schedule_limited', 0):
+            if image.compare_image(self, 'schedule_limited', 0) or image.compare_image(self, 'schedule_limited2', 0):
                 self.logger.error("没有门票了")
                 return True
             # 等待日程报告
