@@ -1,5 +1,6 @@
 import os
 import shutil
+import sys
 import traceback
 
 from flask import Blueprint
@@ -8,6 +9,8 @@ from flask import request
 from common import config, process
 
 configs = Blueprint('configs', __name__)
+
+is_start = False
 
 
 @configs.route('/configs', methods=['GET'])
@@ -51,6 +54,13 @@ def config_migrate():
 
 @configs.route('/menus', methods=['GET'])
 def menus_list():
+    global is_start
+    if not is_start:
+        startup = next((arg.split('=')[1] for arg in sys.argv if arg.startswith('startup=')), None)
+        startup = startup.split("/")
+        for con in startup:
+            process.m.start_process(con)
+        is_start = True
     menus = [
         {
             'name': 'Baas',

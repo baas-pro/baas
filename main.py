@@ -71,9 +71,9 @@ def check_source():
     if hasattr(sys, 'frozen') and sys.platform != 'darwin':
         source_arg_value = next((arg.split('=')[1] for arg in sys.argv if arg.startswith('source=')), None)
         if source_arg_value != "launcher":
-            print("必须从启动器Baas_Windows启动Baas脚本")
+            print("必须从启动器Baas_Windows.exe启动Baas脚本")
             print("如果你是第一次遇到这个错误，请从QQ群重新下载最新启动器覆盖原来的启动器。")
-            print("不需要重新下载和安装")
+            print("不需要重新下载和安装Baas")
             launcher.wait()
             sys.exit(1)
 
@@ -96,4 +96,3 @@ if __name__ == '__main__':
         check_thread.start()
 
         run_flask()
-

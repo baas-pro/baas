@@ -121,7 +121,10 @@ def start_baas_windows():
 
     # 启动 baas.exe
     print_title("Baas启动")
-    subprocess.Popen([baas_exe_path, 'source=launcher'], cwd=local_path)
+    startup = ''
+    if len(sys.argv) > 1:
+        startup = sys.argv[1]
+    subprocess.Popen([baas_exe_path, 'source=launcher', f'startup={startup}'], cwd=local_path)
 
 
 # 启动 baas.app 程序（macOS）
@@ -146,7 +149,7 @@ def resource_path(relative_path):
 
 def main():
     try:
-        print_title("Baas启动器 v1.0")
+        print_title("Baas启动器 v2.0")
         # 检查 Git 是否安装
         if not command_exists('git'):
             install_git()
