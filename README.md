@@ -1,4 +1,4 @@
-# Blue Archive Auto Script
+# Blue Archive Auto Script 蔚蓝档案 国服 国际服 日服 全自动清理日常脚本、总力战、全自动开图、最新活动开图、加成、扫荡、24小时咖啡厅摸头等等
 
 > 右侧 Releases 可下载最新版本Baas
 
